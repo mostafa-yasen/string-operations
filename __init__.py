@@ -24,8 +24,21 @@ def get_file_content(filename):
         return ''
 
 
+def remove_special_chars(chars=["'", '"', ",", ";", "~", "`",
+                                "!", "@", "#", "$", "%", "^",
+                                "&", "*", "(", ")", "-", "_", "=", "+",
+                                "/", ".", ">", "<", "?", "/",
+                                "|"], string=""):
+    for ch in chars:
+        string = string.replace(ch, '')
+
+    return string
+
+
 if __name__ == "__main__":
     files = get_file_paths()
-    print(files)
     for file in files:
-        print(get_file_content(file))
+        file_content = get_file_content(file)
+        str = remove_special_chars(string=file_content)
+        print(str)
+        print("." * 50)
