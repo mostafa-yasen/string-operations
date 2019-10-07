@@ -28,17 +28,28 @@ def remove_special_chars(chars=["'", '"', ",", ";", "~", "`",
                                 "!", "@", "#", "$", "%", "^",
                                 "&", "*", "(", ")", "-", "_", "=", "+",
                                 "/", ".", ">", "<", "?", "/",
-                                "|"], string=""):
+                                "|"], str=""):
     for ch in chars:
-        string = string.replace(ch, '')
+        str = str.replace(ch, '')
 
-    return string
+    return str
+
+
+def tokenize(str):
+    arr = str.split(' ')
+    for val in arr:
+        try:
+            arr.remove('')
+        except Exception:
+            pass
+
+    return arr
 
 
 if __name__ == "__main__":
     files = get_file_paths()
     for file in files:
         file_content = get_file_content(file)
-        str = remove_special_chars(string=file_content)
-        print(str)
-        print("." * 50)
+        str = remove_special_chars(str=file_content)
+        tokens = tokenize(str)
+        print(tokens)
